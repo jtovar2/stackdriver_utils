@@ -1,0 +1,9 @@
+{
+    "type" : "custom.googleapis.com/total_number_of_queries",
+    "labels" : [],
+    "metricKind" : "GAUGE",
+    "valueType" : "INT64",
+    "unit" : "queries",
+    "description" : "The total number of queries run in the timeframe",
+    "displayName" : "Total number of queries"
+}

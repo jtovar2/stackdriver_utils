@@ -1,0 +1,10 @@
+{
+    "type" : "custom.googleapis.com/total_size_of_data_processed",
+    "labels" :[],
+    "metricKind" : "CUMULATIVE",
+    "valueType" : "DOUBLE",
+    "unit" : "GBy",
+    "description" : "The total amount of data processed per day",
+    "displayName" : "Total size of processed data"
+}
+

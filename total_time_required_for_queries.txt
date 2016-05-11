@@ -1,0 +1,10 @@
+{
+    "type" : "custom.googleapis.com/total_time_required_for_queries",
+    "labels : [],
+    "metricKind" : "cumulative",
+    "valueType" : "DOUBLE",
+    "unit" : "s",
+    "description" : "The total amount of time required to run all queries in one day",
+    "displayName" : "Total time required to run all queries per day"
+}
+

@@ -1,0 +1,10 @@
+{
+    "type" : "custom.googleapis.com/total_number_rows_processed",
+    "labels" : [],
+    "metricKind" : "CUMULATIVE",
+    "valueType" : "INT64",
+    "unit" : "rows",
+    "description" : "The total number of rows processed in one daye",
+    "displayName" : "Total number of rows processed per day"
+}
+

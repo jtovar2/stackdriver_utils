@@ -1,0 +1,10 @@
+{
+    "type" : custom_metric_type,
+    "labels" : [],
+    "metricKind" : "CUMULATIVE",
+    "valueType" : "MONEY",
+    "unit" : "dollars",
+    "description" : "Total cost from queries in one day",
+    "displayName" : "Total Cost per day"
+}
+
