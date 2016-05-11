@@ -32,7 +32,7 @@ def write_timeseries_value(project_id, custom_metric_name, value, instance_id):
     value = get_dummy_data_point()
     print value
     start_time = get_now_rfc3339()
-    end_time = get_now_rfc339()
+    end_time = get_now_rfc3339()
     metric_type = custom_metric["type"]
     metric_value_type = custom_metric["valueType"]
     point_value_type = ""
