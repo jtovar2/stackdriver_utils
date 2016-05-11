@@ -18,7 +18,7 @@ def get_now_rfc3339():
     return format_rfc3339(datetime.datetime.utcnow())
 def get_first_day_of_current_month_rfc3339():
     today = datetime.date.today()
-    first_of_month = date(today.year, today.month, 1)
+    first_of_month = datetime.date(today.year, today.month, 1)
     return format_rfc3339(first_of_month, datetime.time.min)
 def get_http_client():
     """Builds an http client authenticated with the service account credentials"""
