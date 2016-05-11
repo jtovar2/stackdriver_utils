@@ -16,6 +16,10 @@ def get_start_time():
 def get_now_rfc3339():
     # Return now
     return format_rfc3339(datetime.datetime.utcnow())
+def get_first_day_of_current_month_rfc3339():
+    today = date.today()
+    first_of_month = date(today.year, today.month, 1)
+    return format_rfc3339(first_of_month, datetime.time.min)
 def get_http_client():
     """Builds an http client authenticated with the service account credentials"""
     credentials = GoogleCredentials.get_application_default()
@@ -27,11 +31,14 @@ def write_timeseries_value(project_id, custom_metric_name, value, instance_id):
     project_resource = "projects/{0}".format(project_id)
     value = get_dummy_data_point()
     print value
-    now = get_now_rfc3339()
+    start_time = get_now_rfc3339()
+    end_time = get_now_rfc339()
     metric_type = custom_metric["type"]
     metric_value_type = custom_metric["valueType"]
     point_value_type = ""
     metric_kind = custom_metric["metricKind"]
+    if metric_kind == "CUMULATIVE":
+        start_time = get_first_day_of_current_month_rfc3339()
     if metric_value_type == "DOUBLE":
         point_value_type = "doubleValue"
     elif metric_value_type == "INT64":
@@ -55,8 +62,8 @@ def write_timeseries_value(project_id, custom_metric_name, value, instance_id):
         "points": [
             {
                 "interval": {
-                    "startTime": now,
-                    "endTime": now
+                    "startTime": start_time,
+                    "endTime": end_time
                 },
                 "value": {
                     point_value_type : value
