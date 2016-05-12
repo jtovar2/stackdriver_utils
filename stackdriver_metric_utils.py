@@ -97,11 +97,16 @@ def write_metric(custom_metric_name, value):
         name=project_resource, body={"timeSeries":[timeseries_data]})
     request.execute()
 def create_metric(metric_name):
+    print("1")
     custom_metric = get_metric(metric_name)
+    print("2")
     client = get_http_client()
+    print("3")
     project_id = get_project_id()
+    print("4")
     client.projects().metricDescriptors().create(
         name=project_id, body=custom_metric).execute()
+    print("5")
 def get_dummy_data_point():
     number = random.randint(0,100)
     print "dummy data point " + str(number)
