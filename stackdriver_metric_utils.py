@@ -122,7 +122,9 @@ with open('custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
 for metric in all_metrics:
     try:
-        delete_metric(metric)
-        print "deleted " + metric
+        create_metric(metric)
+        print "created " + metric
+        time.sleep(3)
+        write_metric(metric, 10)
     except Exception:
         pass
