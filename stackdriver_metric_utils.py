@@ -40,7 +40,8 @@ def get_instance_id():
 def delete_metric(metric_name):
     project_id = get_project_id()
     project_resource = "projects/{0}".format(project_id)
-    metric_name = project_resource + "/metricDescriptors/" + metric_name
+    metric = get_metric(metric_name)
+    metric_name = project_resource + "/metricDescriptors/" + metric["type"]
     client = get_http_client()
     client.projects().metricDescriptors().delete(name = metric_name).execute()
 def write_metric(custom_metric_name, value):
