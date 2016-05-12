@@ -117,7 +117,7 @@ def get_seconds(start_time, end_time):
 def get_gigabytes(bytes):
     return bytes//1000000000
 all_metrics = []
-with open("custom_metrics_dictionary.txt", "r") as inf:
+with open("'custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
 for metric in all_metrics:
     delete_metric(metric)
