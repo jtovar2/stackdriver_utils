@@ -37,7 +37,12 @@ def get_project_id():
 def get_instance_id():
     instance_id = requests.get(metadata_server + 'hostname', headers = metadata_flavor).text.split('.')[0]
     return instance_id
-
+def delete_metric(metric_name):
+    project_id = get_project_id()
+    project_resource = "projects/{0}".format(project_id)
+    metric_name = project_resource + "/metricDescriptors/" + metric_name
+    client = get_http_client()
+    client.projects().metricDescriptors().delete(name = metric_name).execute()
 def write_metric(custom_metric_name, value):
     project_id = get_project_id()
     instance_id = get_instance_id()
@@ -111,13 +116,4 @@ def get_seconds(start_time, end_time):
     return diff
 def get_gigabytes(bytes):
     return bytes//1000000000
-
-all_metrics = []
-with open("custom_metrics_dictionary.txt", "r") as inf:
-    all_metrics = eval(inf.read())
-for metric in all_metrics:
-    print metric
-    create_metric(project_id, metric)
-    time.sleep(2)
-    write_metric(metric, 10)
 
