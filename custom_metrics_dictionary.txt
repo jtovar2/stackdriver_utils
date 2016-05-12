@@ -51,7 +51,7 @@
     "valueType": "INT64",
     "unit": "s",
     "description": "The aggregate time spent on loading data onto big query by the script table_loader.py",
-    "displyaName": "Table loader: total load duration"
+    "displayName": "Table loader: total load duration"
 },
 "table_loader_total_gigabytes_pulled_by_script": {
     "type": "custom.googleapis.com/table_loader_total_gigabytes_pulled_by_script",
