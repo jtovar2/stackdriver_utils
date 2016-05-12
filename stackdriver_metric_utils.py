@@ -4,6 +4,11 @@ import time
 import random
 from apiclient import discovery
 from oauth2client.client import GoogleCredentials
+import requests
+metadata_server = "http://metadata/computeMetadata/v1/instance/"
+metadata_flavor = {'Metadata-Flavor' : 'Google'}
+
+
 def format_rfc3339(datetime_instance=None):
     """Formats a datetime per RFC 3339.
     :param datetime_instance: Datetime instanec to format, defaults to utcnow
@@ -26,7 +31,16 @@ def get_http_client():
     credentials = GoogleCredentials.get_application_default()
     client = discovery.build('monitoring', 'v3', credentials=credentials)
     return client
-def write_timeseries_value(project_id, custom_metric_name, value, instance_id):
+def get_project_id():
+    project_id = requests.get(metadata_server + 'hostname', headers = metadata_flavor).text.split('.')[2]
+    return project_id
+def get_instance_id():
+    instance_id = requests.get(metadata_server + 'hostname', headers = metadata_flavor).text.split('.')[0]
+    return instance_id
+
+def write_metric(custom_metric_name, value):
+    project_id = get_project_id()
+    instance_id = get_instance_id()
     custom_metric = get_metric(custom_metric_name)
     client = get_http_client()
     project_resource = "projects/{0}".format(project_id)
@@ -98,7 +112,6 @@ def get_seconds(start_time, end_time):
 def get_gigabytes(bytes):
     return bytes//1000000000
 
-project_id = "ea19090210"
 all_metrics = []
 with open("custom_metrics_dictionary.txt", "r") as inf:
     all_metrics = eval(inf.read())
@@ -106,5 +119,5 @@ for metric in all_metrics:
     print metric
     create_metric(project_id, metric)
     time.sleep(2)
-    write_timeseries_value(project_id, metric, 10, 'instance-0')
+    write_metric(metric, 10)
 

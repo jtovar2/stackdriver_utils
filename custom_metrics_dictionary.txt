@@ -5,7 +5,7 @@
     "metricKind" : "CUMULATIVE",
     "valueType" : "MONEY",
     "unit" : "dollars",
-    "description" : "Total cost from queries",
+    "description" : "Total cost from queries across all jobs”,
     "displayName" : "Total Cost per day"
 },
 "total_number_of_queries": {
@@ -14,8 +14,8 @@
     "metricKind" : "CUMULATIVE",
     "valueType" : "INT64",
     "unit" : "queries",
-    "description" : "The total number of queries run in one daye",
-    "displayName" : "Total number of queries per day"
+    "description" : "The total number of queries across all jobs”,
+    "displayName" : "Total number of queries”
 },
 "total_number_of_rows_processed": {
     "type" : "custom.googleapis.com/total_number_rows_processed",
@@ -23,8 +23,8 @@
     "metricKind" : "CUMULATIVE",
     "valueType" : "INT64",
     "unit" : "rows",
-    "description" : "The total number of rows processed in one daye",
-    "displayName" : "Total number of rows processed per day"
+    "description" : "The total number of rows processed across all jobs”,
+    "displayName" : "Total number of rows processed"
 },
 "total_size_of_data": {
     "type" : "custom.googleapis.com/total_size_of_data",
@@ -32,8 +32,8 @@
     "metricKind" : "CUMULATIVE",
     "valueType" : "DOUBLE",
     "unit" : "GBy",
-    "description" : "The total amount of data processed per day",
-    "displayName" : "Total size of processed data per day"
+    "description" : "The total amount of data processed across all jobs”,
+    "displayName" : "Total size of processed data across all jobs"
 },
 "total_time_required_for_queries": {
     "type" : "custom.googleapis.com/total_time_required_for_queries",
@@ -41,8 +41,8 @@
     "metricKind" : "CUMULATIVE",
     "valueType" : "DOUBLE",
     "unit" : "s",
-    "description" : "The total amount of time required to run all queries in one day",
-    "displayName" : "Total time required to run all queries per day"
+    "description" : "The total amount of time required to run all queries across all jobs",
+    "displayName" : "Total time required to run all queries across all jobs"
 },
 "table_loader_total_load_duration": {
     "type": "custom.googleapis.com/table_loader_total_load_duration",
@@ -86,7 +86,7 @@
     "metricKind": "CUMULATIVE",
     "valueType": "INT64",
     "unit": "s",
-    "description": "The aggreate time spent generating the delta or change in datasets by the script delta loader",
+    "description": "The aggregate time spent generating the delta or change in datasets by the script delta loader",
     "displayName": "Delta loader: total computational time"
 },
 "delta_loader_total_rows_processed": {
@@ -95,7 +95,7 @@
     "metricKind": "CUMULATIVE",
     "valueType": "INT64",
     "unit": "rows",
-    "description": "The aggragate number of rows processed in generating the delta or change in datasets by the script delta loader",
+    "description": "The aggregate number of rows processed in generating the delta or change in datasets by the script delta loader",
     "displayName": "Delta loader: total rows processed"
 },
 "delta_loader_size_of_delta": {
