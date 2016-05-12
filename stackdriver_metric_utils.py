@@ -121,5 +121,8 @@ all_metrics = {}
 with open('custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
 for metric in all_metrics:
-    delete_metric(metric)
-    print "deleted " + metric
+    try:
+        delete_metric(metric)
+        print "deleted " + metric
+    except Exception:
+        pass
