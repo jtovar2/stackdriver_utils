@@ -106,7 +106,7 @@ def get_dummy_data_point():
     print "dummy data point " + str(number)
     return number
 def get_metric(metric_name):
-    all_metrics = []
+    all_metrics = {}
     with open("custom_metrics_dictionary.txt", "r") as inf:
         all_metrics = eval(inf.read())
     return all_metrics[metric_name]
@@ -116,7 +116,7 @@ def get_seconds(start_time, end_time):
     return diff
 def get_gigabytes(bytes):
     return bytes//1000000000
-all_metrics = []
+all_metrics = {}
 with open('custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
 for metric in all_metrics:
