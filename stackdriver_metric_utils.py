@@ -127,4 +127,5 @@ for metric in all_metrics:
         time.sleep(3)
         write_metric(metric, 10)
     except Exception:
+        print "skipped"
         pass
