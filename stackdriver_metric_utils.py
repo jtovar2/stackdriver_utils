@@ -102,9 +102,8 @@ def create_metric(metric_name):
     project_id = get_project_id()
     client = get_http_client()
     project_resource = "projects/{0}".format(project_id)
-    metric_name = project_resource
     client.projects().metricDescriptors().create(
-        name=metric_name, body=custom_metric).execute()
+        name=project_resource, body=custom_metric).execute()
 def get_dummy_data_point():
     number = random.randint(0,100)
     print "dummy data point " + str(number)
@@ -125,10 +124,11 @@ all_metrics = {}
 with open('custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
 for metric in all_metrics:
-    #try:
+    try:
         create_metric(metric)
         print "created " + metric
         time.sleep(3)
         write_metric(metric, 10)
-    #except Exception:
-        #pass
+    except Exception:
+        pass
+ 
