@@ -102,7 +102,7 @@ def create_metric(metric_name):
     project_id = get_project_id()
     client = get_http_client()
     project_resource = "projects/{0}".format(project_id)
-    metric_name = project_resource + "/metricDescriptors/" + metric["type"]
+    metric_name = project_resource + "/metricDescriptors/" + custom_metric["type"]
     client.projects().metricDescriptors().create(
         name=metric_name, body=custom_metric).execute()
 def get_dummy_data_point():
