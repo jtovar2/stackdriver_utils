@@ -101,8 +101,10 @@ def create_metric(metric_name):
     client = get_http_client()
     project_id = get_project_id()
     client = get_http_client()
+    project_resource = "projects/{0}".format(project_id)
+    metric_name = project_resource + "/metricDescriptors/" + metric["type"]
     client.projects().metricDescriptors().create(
-        name="projects/{0}".format(project_id)+project_id, body=custom_metric).execute()
+        name=metric_name, body=custom_metric).execute()
 def get_dummy_data_point():
     number = random.randint(0,100)
     print "dummy data point " + str(number)
@@ -118,6 +120,7 @@ def get_seconds(start_time, end_time):
     return diff
 def get_gigabytes(bytes):
     return bytes//1000000000
+
 all_metrics = {}
 with open('custom_metrics_dictionary.txt', 'r') as inf:
     all_metrics = eval(inf.read())
@@ -128,5 +131,4 @@ for metric in all_metrics:
         time.sleep(3)
         write_metric(metric, 10)
     #except Exception:
-        #print "skipped"
         #pass
