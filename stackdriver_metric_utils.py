@@ -15,13 +15,14 @@ def format_rfc3339(datetime_instance=None):
     """
     return datetime_instance.isoformat("T") + "Z"
 def get_start_time():
-    # Return now- 5 minutes
+    # Return time 5 minutes from current time
     start_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=5)
     return format_rfc3339(start_time)
 def get_now_rfc3339():
-    # Return now
+    # Return current time
     return format_rfc3339(datetime.datetime.utcnow())
 def get_first_day_of_current_month_rfc3339():
+    # Return first day of the month and format per RFC 3339
     today = datetime.date.today()
     first_of_month_date = datetime.date(today.year, today.month, 1)
     first_of_month_datetime = datetime.datetime.combine(first_of_month_date, datetime.time.min)
@@ -32,12 +33,15 @@ def get_http_client():
     client = discovery.build('monitoring', 'v3', credentials=credentials)
     return client
 def get_project_id():
+    # Return project id from Google Cloud Storage
     project_id = requests.get(metadata_server + 'hostname', headers = metadata_flavor).text.split('.')[2]
     return project_id
 def get_instance_id():
+    # Return instance id of virtual machine
     instance_id = requests.get(metadata_server + 'hostname', headers = metadata_flavor).text.split('.')[0]
     return instance_id
 def delete_metric(metric_name):
+    # Deletes metric from dashboard
     project_id = get_project_id()
     project_resource = "projects/{0}".format(project_id)
     metric = get_metric(metric_name)
@@ -45,6 +49,7 @@ def delete_metric(metric_name):
     client = get_http_client()
     client.projects().metricDescriptors().delete(name = metric_name).execute()
 def write_metric(custom_metric_name, value):
+    # Writes metric to console 
     project_id = get_project_id()
     instance_id = get_instance_id()
     custom_metric = get_metric(custom_metric_name)
@@ -97,6 +102,7 @@ def write_metric(custom_metric_name, value):
         name=project_resource, body={"timeSeries":[timeseries_data]})
     request.execute()
 def create_metric(metric_name):
+    # Creates metric for use in dashboard
     custom_metric = get_metric(metric_name)
     client = get_http_client()
     project_id = get_project_id()
@@ -109,20 +115,23 @@ def get_dummy_data_point():
     print "dummy data point " + str(number)
     return number
 def get_metric(metric_name):
+    # Return metric from dictionary
     all_metrics = {}
     with open("custom_metrics_dictionary.txt", "r") as inf:
         all_metrics = eval(inf.read())
     return all_metrics[metric_name]
 def get_seconds(start_time, end_time):
+    # Return duration of the metric measurement
     diff = end_time - start_time
     diff = diff//1000
     return diff
 def get_gigabytes(bytes):
+    # Return size of data processed in jobs in gigabytes
     return bytes//1000000000
 
 all_metrics = {}
 with open('custom_metrics_dictionary.txt', 'r') as inf:
-    all_metrics = eval(inf.read())
+    all_metrics = eval(inf.read())()
 for metric in all_metrics:
     try:
         create_metric(metric)
